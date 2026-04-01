@@ -236,7 +236,8 @@ The application **auto-seeds** the database on first run:
 ## 📸 Screenshots
 
 ### 🔐 Login Page
-![Login Page] C:\Users\Komal\OneDrive\Pictures\HRMSProject\login.png
+<img width="812" height="833" alt="login" src="https://github.com/user-attachments/assets/d663870b-d3b2-42a8-9c6b-9ebf82fce7ca" />
+
 *Elegant login card with gradient header, show/hide password toggle, and a link to the registration page.*
 
 ---
