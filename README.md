@@ -243,63 +243,62 @@ The application **auto-seeds** the database on first run:
 ---
 
 ### 📝 Register Page
-![Register Page](screenshots/screenshot_register.png)
+<img width="1048" height="843" alt="Screenshot 2026-04-01 212420" src="https://github.com/user-attachments/assets/fc18e948-971f-49da-848d-08d364414514" />
+
 *Clean user registration page to create a new account and join the HRMS portal.*
 
 ---
 
 ### 📊 Dashboard
-![Dashboard](screenshots/screenshot_dashboard.png)
+<img width="1917" height="906" alt="Screenshot 2026-04-01 212519 - Copy" src="https://github.com/user-attachments/assets/d0b452e2-c987-4d34-bedc-114e24152a6c" />
+
 *Real-time overview with 4 stat cards (Total Employees, Departments, Pending Leaves, Recent Requests), a Quick Actions panel, and a recent leave activity table.*
 
 ---
 
 ### 👨‍💼 Employee Management
-![Employee List](screenshots/screenshot_employee_list.png)
+<img width="1918" height="902" alt="Screenshot 2026-04-01 212611 - Copy" src="https://github.com/user-attachments/assets/839b8d3e-0d70-4153-92a6-91cebc754f2c" />
+
 *Full employee table with avatar initials, department badges, salary (₹), joining date, status indicator, and edit/delete actions.*
 
 ---
 
 ### 🔍 Employee Search
-![Employee Search](screenshots/screenshot_employee_search.png)
+<img width="1919" height="907" alt="Screenshot 2026-04-01 212645" src="https://github.com/user-attachments/assets/8ea2f7ee-0a6e-4999-a187-31fbcea0fe3b" />
+
 *Live keyword search filters the employee table instantly — shows result count badge and a clear button to reset.*
 
 ---
 
 ### ➕ Add New Employee
-![Add Employee](screenshots/screenshot_add_employee.png)
+<img width="1912" height="905" alt="Screenshot 2026-04-01 212732" src="https://github.com/user-attachments/assets/90714a39-a8be-464f-9ec1-d09641c65ba7" />
 *Validated form with fields for name, email, phone (10-digit pattern), department dropdown, designation, salary, joining date, and status.*
 
 ---
 
 ### 🏛️ Department Management
-![Departments](screenshots/screenshot_departments.png)
+<img width="1915" height="911" alt="Screenshot 2026-04-01 212759" src="https://github.com/user-attachments/assets/1b8b44b8-6cea-4949-adff-17fc30d3a483" />
 *Department cards display name, description, floor/location, and live employee count — with edit and delete actions per card.*
 
 ---
 
 ### ➕ Add Department
-![Add Department](screenshots/screenshot_add_department.png)
+<img width="1916" height="862" alt="Screenshot 2026-04-01 212821" src="https://github.com/user-attachments/assets/422038f2-91e3-4de8-81c7-2eced84862fc" />
 *Minimal form to create a new department with name, description, and location.*
 
 ---
 
 ### 📋 Leave Requests
-![Leave Requests](screenshots/screenshot_leave_requests.png)
+<img width="1915" height="724" alt="Screenshot 2026-04-01 212846" src="https://github.com/user-attachments/assets/4872e6a7-ab62-40ef-a9c1-fc4d9b052b2c" />
 *Comprehensive leave table showing employee, department, leave type (color-coded badge), date range, day count, reason, applied date, and approval status.*
 
 ---
 
 ### 📅 Apply for Leave
-![Apply Leave](screenshots/screenshot_apply_leave.png)
+<img width="1915" height="917" alt="Screenshot 2026-04-01 212913" src="https://github.com/user-attachments/assets/a0c02d3b-c539-4f02-805b-9a75b8855b8d" />
 *Leave application form with employee selector, leave type dropdown, start/end date pickers, and a reason textarea.*
 
 ---
-
-> 💡 **To use screenshots in your repo:** Create a `screenshots/` folder at the root of your GitHub repository, upload the 10 image files with the exact names shown above, and they will render automatically in this README.
-
----
-
 ## 🔮 Future Improvements
 
 - [ ] 📧 **Email Notifications** — Automated emails on leave approval/rejection via Spring Mail
