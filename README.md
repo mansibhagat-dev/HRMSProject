@@ -243,7 +243,7 @@ The application **auto-seeds** the database on first run:
 ---
 
 ### 📝 Register Page
-<img width="1048" height="843" alt="Screenshot 2026-04-01 212420" src="https://github.com/user-attachments/assets/fc18e948-971f-49da-848d-08d364414514" />
+<img width="700" height="700" alt="Screenshot 2026-04-01 212420" src="https://github.com/user-attachments/assets/fc18e948-971f-49da-848d-08d364414514" />
 
 *Clean user registration page to create a new account and join the HRMS portal.*
 
