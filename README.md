@@ -347,20 +347,18 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 <table>
   <tr>
     <td align="center">
-      <strong>YOUR NAME HERE</strong><br/>
+      <strong>Mansi Bhagat</strong><br/>
       <em>Full Stack Java Developer</em><br/><br/>
       <a href="https://linkedin.com/in/YOUR_LINKEDIN">
         <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
       </a>
       &nbsp;
-      <a href="https://github.com/YOUR_GITHUB">
+      <a href="https://mansibhagat-dev">
         <img src="https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white" />
       </a>
     </td>
   </tr>
 </table>
-
-> 🔁 Replace `Mansi Bhagat`, and `https://github.com/mansibhagat-dev` with your actual details.
 
 ---
 
