@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS - Leave Requests</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="app-body">
+
+<div th:replace="navbar :: navbar"></div>
+
+<div class="container-fluid py-4 px-4">
+
+    <div class="page-header mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>
+            <h3 class="fw-bold mb-0">
+                <i class="bi bi-calendar-check-fill me-2 text-warning"></i>Leave Requests
+                <span class="badge bg-warning text-dark ms-2" th:if="${pendingCount != null and pendingCount > 0}" th:text="${pendingCount} + ' Pending'"></span>
+            </h3>
+            <p class="text-muted mb-0">Review and manage employee leave applications.</p>
+        </div>
+        <a th:href="@{/leaves/apply}" class="btn btn-warning">
+            <i class="bi bi-calendar-plus-fill me-2"></i>Apply Leave
+        </a>
+    </div>
+
+    <div th:if="${successMsg != null}" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle-fill me-2"></i><span th:text="${successMsg}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div th:if="${errorMsg != null}" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i><span th:text="${errorMsg}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div th:if="${leaves == null or #lists.isEmpty(leaves)}" class="text-center py-5 text-muted">
+                <i class="bi bi-calendar-x fs-1"></i>
+                <p class="mt-2 fs-5">No leave requests found.</p>
+                <a th:href="@{/leaves/apply}" class="btn btn-warning">Apply for Leave</a>
+            </div>
+
+            <div th:if="${leaves != null and !#lists.isEmpty(leaves)}" class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Employee</th>
+                            <th>Department</th>
+                            <th>Leave Type</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Days</th>
+                            <th>Reason</th>
+                            <th>Applied On</th>
+                            <th>Status</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="leave, stat : ${leaves}">
+                            <td class="text-muted small" th:text="${stat.count}"></td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-circle me-2" th:text="${leave.employee != null ? #strings.substring(leave.employee.name, 0, 1) : 'N'}"></div>
+                                    <span class="fw-semibold" th:text="${leave.employee != null ? leave.employee.name : 'N/A'}"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border" th:text="${leave.employee != null and leave.employee.department != null ? leave.employee.department.name : 'N/A'}"></span>
+                            </td>
+                            <td>
+                                <span class="badge bg-info text-dark" th:text="${leave.leaveType != null ? leave.leaveType : 'N/A'}"></span>
+                            </td>
+                            <td th:text="${leave.startDate != null ? #temporals.format(leave.startDate, 'dd MMM yyyy') : 'N/A'}" class="small"></td>
+                            <td th:text="${leave.endDate != null ? #temporals.format(leave.endDate, 'dd MMM yyyy') : 'N/A'}" class="small"></td>
+
+                            <!-- FIXED DAYS CALCULATION -->
+                            <td class="fw-semibold text-center"
+                                th:text="${leave.startDate != null and leave.endDate != null ? T(java.time.temporal.ChronoUnit).DAYS.between(leave.startDate, leave.endDate) + 1 : 0}">
+                            </td>
+
+                            <td>
+                                <span class="text-muted small" th:text="${leave.reason != null ? #strings.abbreviate(leave.reason, 40) : 'N/A'}"></span>
+                            </td>
+                            <td th:text="${leave.appliedDate != null ? #temporals.format(leave.appliedDate, 'dd MMM yyyy') : 'N/A'}" class="text-muted small"></td>
+
+                            <!-- FIXED STATUS BADGE -->
+                            <td>
+                                <span class="badge"
+                                      th:classappend="${leave.status != null and leave.status.toString() == 'APPROVED'} ? 'bg-success' : (${leave.status != null and leave.status.toString() == 'REJECTED'} ? 'bg-danger' : 'bg-warning text-dark')"
+                                      th:text="${leave.status != null ? leave.status : 'PENDING'}">
+                                </span>
+                            </td>
+
+                            <td class="text-center">
+                                <div th:if="${leave.status != null and leave.status.toString() == 'PENDING'}" class="d-flex gap-1 justify-content-center">
+                                    <a th:href="@{/leaves/approve/{id}(id=${leave.id})}"
+                                       class="btn btn-sm btn-success" title="Approve"
+                                       onclick="return confirm('Approve this leave request?')">
+                                        <i class="bi bi-check-lg"></i>
+                                    </a>
+                                    <a th:href="@{/leaves/reject/{id}(id=${leave.id})}"
+                                       class="btn btn-sm btn-danger" title="Reject"
+                                       onclick="return confirm('Reject this leave request?')">
+                                        <i class="bi bi-x-lg"></i>
+                                    </a>
+                                </div>
+                                <span th:if="${leave.status != null and leave.status.toString() != 'PENDING'}" class="text-muted small">
+                                    <i class="bi bi-check-all"></i> Done
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

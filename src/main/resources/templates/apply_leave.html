@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS - Apply Leave</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="app-body">
+
+<div th:replace="~{navbar :: navbar}"></div>
+
+<div class="container-fluid py-4 px-4">
+    <div class="page-header mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/leaves}">Leave Requests</a></li>
+                <li class="breadcrumb-item active">Apply Leave</li>
+            </ol>
+        </nav>
+        <h3 class="fw-bold mb-0">
+            <i class="bi bi-calendar-plus-fill me-2 text-warning"></i>Apply for Leave
+        </h3>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <form th:action="@{/leaves/apply}" th:object="${leaveRequest}" method="post" novalidate>
+
+                        <div class="row g-3">
+                            <!-- Employee -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Employee <span class="text-danger">*</span></label>
+                                <select class="form-select" th:field="*{employee}"
+                                        th:classappend="${#fields.hasErrors('employee')} ? 'is-invalid' : ''">
+                                    <option value="">-- Select Employee --</option>
+                                    <option th:each="emp : ${employees}"
+                                            th:value="${emp.id}"
+                                            th:text="${emp.name + ' — ' + emp.department.name}"></option>
+                                </select>
+                                <div th:if="${#fields.hasErrors('employee')}" class="invalid-feedback" th:errors="*{employee}"></div>
+                            </div>
+
+                            <!-- Leave Type -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Leave Type <span class="text-danger">*</span></label>
+                                <select class="form-select" th:field="*{leaveType}"
+                                        th:classappend="${#fields.hasErrors('leaveType')} ? 'is-invalid' : ''">
+                                    <option value="">-- Select Type --</option>
+                                    <option value="Sick Leave">Sick Leave</option>
+                                    <option value="Casual Leave">Casual Leave</option>
+                                    <option value="Earned Leave">Earned Leave</option>
+                                    <option value="Maternity Leave">Maternity Leave</option>
+                                    <option value="Paternity Leave">Paternity Leave</option>
+                                    <option value="Unpaid Leave">Unpaid Leave</option>
+                                </select>
+                                <div th:if="${#fields.hasErrors('leaveType')}" class="invalid-feedback" th:errors="*{leaveType}"></div>
+                            </div>
+
+                            <!-- Start Date -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Start Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" th:field="*{startDate}"
+                                       th:classappend="${#fields.hasErrors('startDate')} ? 'is-invalid' : ''">
+                                <div th:if="${#fields.hasErrors('startDate')}" class="invalid-feedback" th:errors="*{startDate}"></div>
+                            </div>
+
+                            <!-- End Date -->
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">End Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" th:field="*{endDate}"
+                                       th:classappend="${#fields.hasErrors('endDate')} ? 'is-invalid' : ''">
+                                <div th:if="${#fields.hasErrors('endDate')}" class="invalid-feedback" th:errors="*{endDate}"></div>
+                            </div>
+
+                            <!-- Reason -->
+                            <div class="col-12">
+                                <label class="form-label fw-semibold">Reason <span class="text-danger">*</span></label>
+                                <textarea class="form-control" th:field="*{reason}" rows="4"
+                                          th:classappend="${#fields.hasErrors('reason')} ? 'is-invalid' : ''"
+                                          placeholder="Please provide a reason for your leave request..."></textarea>
+                                <div th:if="${#fields.hasErrors('reason')}" class="invalid-feedback" th:errors="*{reason}"></div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <div class="d-flex gap-2 justify-content-end">
+                            <a th:href="@{/leaves}" class="btn btn-outline-secondary px-4">Cancel</a>
+                            <button type="submit" class="btn btn-warning px-4">
+                                <i class="bi bi-send-fill me-1"></i>Submit Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
